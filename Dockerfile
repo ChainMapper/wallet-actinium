@@ -4,8 +4,8 @@ ENV GIT_COIN_URL    https://github.com/Actinium-project/Actinium.git
 ENV GIT_COIN_NAME   actinium   
 
 RUN	git clone $GIT_COIN_URL $GIT_COIN_NAME \
-	&& git checkout tags/v0.17.2.0 \
 	&& cd $GIT_COIN_NAME \
+	&& git checkout tags/v0.17.2.0 \
 	&& chmod +x autogen.sh \
 	&& chmod +x share/genbuild.sh \
 	&& chmod +x src/leveldb/build_detect_platform \
