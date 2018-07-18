@@ -12,6 +12,7 @@ RUN	git clone $GIT_COIN_URL $GIT_COIN_NAME \
 	&& ./autogen.sh && ./configure \
 	&& make \
 	&& make install \
+	&& cd / && rm -rf /$GIT_COIN_NAME \
 	&& mkdir /data \
 	&& mkdir /data/.Actinium
 	
