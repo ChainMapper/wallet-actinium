@@ -12,14 +12,14 @@ config="/config/Actinium.conf"
 if [ -f "$config" ]
 then
     echo "Using $config"
-    cp $config /data/.Actinium/Actinium.conf
+    cp $config /data/.actinium/Actinium.conf
 fi
 
 wallet="/config/wallet.dat"
 if [ -f "$wallet" ]
 then
     echo "Using $wallet"
-    cp $wallet /data/.Actinium/wallet.dat
+    cp $wallet /data/.actinium/wallet.dat
 fi
 
 echo "Starting ACM daemon..."

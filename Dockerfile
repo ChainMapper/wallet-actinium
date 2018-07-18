@@ -16,7 +16,7 @@ RUN	git clone $GIT_COIN_URL $GIT_COIN_NAME \
 	&& mkdir /data/.Actinium
 	
 #Add a config so you can run without providing a bitnodes.conf through a volume
-COPY Actinium.conf /data/.Actinium/Actinium.conf
+COPY Actinium.conf /data/.actinium/Actinium.conf
 
 #rpc and mn port
 EXPOSE 5335 4334
