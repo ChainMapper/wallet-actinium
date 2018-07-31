@@ -1,29 +1,29 @@
-FROM joshendriks/walletbase
+FROM chainmapper/walletbase-xenial-build as builder
 
 ENV GIT_COIN_URL    https://github.com/Actinium-project/Actinium.git
 ENV GIT_COIN_NAME   actinium   
 
 RUN	git clone $GIT_COIN_URL $GIT_COIN_NAME \
 	&& cd $GIT_COIN_NAME \
-	&& git checkout tags/v0.17.2.0 \
+	&& git checkout tags/v0.17.3.0 \
 	&& chmod +x autogen.sh \
 	&& chmod +x share/genbuild.sh \
 	&& chmod +x src/leveldb/build_detect_platform \
 	&& ./autogen.sh && ./configure \
 	&& make \
-	&& make install \
-	&& cd / && rm -rf /$GIT_COIN_NAME \
-	&& mkdir /data \
-	&& mkdir /data/.Actinium
-	
-#Add a config so you can run without providing a bitnodes.conf through a volume
-COPY Actinium.conf /data/.actinium/Actinium.conf
+	&& make install
 
-#rpc and mn port
-EXPOSE 5335 4334
+FROM chainmapper/walletbase-xenial as runtime
 
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+RUN mkdir /data
 ENV HOME /data
 
+#rpc port & main port
+EXPOSE 5335 4334
+
 COPY start.sh /start.sh
-RUN chmod 777 /start.sh
-CMD /start.sh
+COPY gen_config.sh /gen_config.sh
+RUN chmod 777 /*.sh
+CMD /start.sh Actinium.conf ACM Actiniumd
