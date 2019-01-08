@@ -1,6 +1,6 @@
 FROM chainmapper/walletbase-bionic-build as builder
 
-ENV GIT_COIN_URL    https://github.com/Actinium-project/Actinium-ng.git
+ENV GIT_COIN_URL    https://github.com/Actinium-project/Actinium.git
 ENV GIT_COIN_NAME   actinium   
 
 RUN	git clone $GIT_COIN_URL $GIT_COIN_NAME \
