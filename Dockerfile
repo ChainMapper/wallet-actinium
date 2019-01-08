@@ -5,7 +5,7 @@ ENV GIT_COIN_NAME   actinium
 
 RUN	git clone $GIT_COIN_URL $GIT_COIN_NAME \
 	&& cd $GIT_COIN_NAME \
-	&& git checkout tags/v0.19.0.0 \
+	&& git checkout tags/v0.18.4.0 \
 	&& chmod +x autogen.sh \
 	&& chmod +x share/genbuild.sh \
 	&& chmod +x src/leveldb/build_detect_platform \
@@ -20,10 +20,11 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 RUN mkdir /data
 ENV HOME /data
 
-#rpc port & main port
-EXPOSE 6666 4334
+#zmq port, rpc port & main port
+EXPOSE 5555 6666 4334
 
 COPY start.sh /start.sh
 COPY gen_config.sh /gen_config.sh
+COPY wallet.sh /wallet.sh
 RUN chmod 777 /*.sh
 CMD /start.sh Actinium.conf ACM Actiniumd
